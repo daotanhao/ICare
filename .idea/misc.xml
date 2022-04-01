@@ -3,15 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
         <entry key="..\:/Users/huyy8/AndroidStudioProjects/ICare/app/src/main/res/layout/activity_main.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/huyy8/AndroidStudioProjects/ICare/app/src/main/res/layout/activity_sign_in.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/huyy8/AndroidStudioProjects/ICare/app/src/main/res/layout/activity_splash_screen.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/huyy8/AndroidStudioProjects/ICare/app/src/main/res/layout/activity_splash_screen2.xml" value="0.23645833333333333" />
-
+        <entry key="app/src/main/res/drawable/custom_date_picker.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/female_checkbox_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/male_checkbox_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/nav_menu_item.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
-
       </map>
     </option>
   </component>
