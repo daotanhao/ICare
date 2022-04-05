@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +30,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText txtEmail, txtPassword;
     private Button btnSignIn, btnSignUp, btnForgot;
     private Button btnGoogle, btnFacebook;
+    private ProgressBar progressBar;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private static final String tempEmail = "tempEmail";
@@ -43,8 +46,35 @@ public class SignInActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addEvents() {
-        SignIn();
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
+
+                                             SignIn();
+                                             progressBar.setVisibility(View.VISIBLE);
+                                             new Handler().postDelayed(new Runnable() {
+                                                 @Override
+                                                 public void run() {
+                                                     progressBar.setVisibility(View.INVISIBLE);
+                                                 }
+                                             }, 4000);
+                                         }
+                                     }
+        );
+        SignUp();
     }
+
+    private void SignUp() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createUserOnFirebase(String userEmail, String userName) {
         //Set up firestore
@@ -84,48 +114,42 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void SignIn() {
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = txtEmail.getText().toString();
-                String pass = txtPassword.getText().toString();
-                if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    if (!pass.isEmpty()) {
-                        mAuth.signInWithEmailAndPassword(email, pass)
-                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                    @Override
-                                    public void onSuccess(AuthResult authResult) {
-                                        SharedPreferences sharedPreferences = getSharedPreferences(
-                                                tempEmail, MODE_PRIVATE);
+        String email = txtEmail.getText().toString();
+        String pass = txtPassword.getText().toString();
 
-                                        Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-
-                                        SharedPreferences.Editor editor;
-                                        editor = sharedPreferences.edit();
-                                        editor.putString("Email", email);
-                                        editor.apply();
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
+        if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (!pass.isEmpty()) {
+                mAuth.signInWithEmailAndPassword(email, pass)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(SignInActivity.this, "Login Fail ! Please try again.", Toast.LENGTH_SHORT).show();
+                            public void onSuccess(AuthResult authResult) {
+                                SharedPreferences sharedPreferences = getSharedPreferences(
+                                        tempEmail, MODE_PRIVATE);
+
+                                Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+
+                                SharedPreferences.Editor editor;
+                                editor = sharedPreferences.edit();
+                                editor.putString("Email", email);
+                                editor.apply();
+                                startActivity(intent);
+                                finish();
                             }
-                        });
-                    } else {
-                        txtPassword.setError("Your Password must not empty");
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignInActivity.this, "Login Fail ! Please try again.", Toast.LENGTH_SHORT).show();
                     }
-                } else if (email.isEmpty()) {
-                    txtEmail.setError("Your email must not empty");
-                } else {
-                    txtEmail.setError("Please enter correct email");
-
-                }
-
+                });
+            } else {
+                txtPassword.setError("Your Password must not empty");
             }
-        });
+        } else if (email.isEmpty()) {
+            txtEmail.setError("Your email must not empty");
+        } else {
+            txtEmail.setError("Please enter correct email");
+        }
     }
 
     private void addControls() {
@@ -136,5 +160,6 @@ public class SignInActivity extends AppCompatActivity {
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnForgot = (Button) findViewById(R.id.btnForgot);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 }
