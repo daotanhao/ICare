@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/primary_color"
     tools:context=".SignUpActivity">
 
     <androidx.cardview.widget.CardView
@@ -21,7 +20,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SIGN UP"
-                android:textColor="@color/primary_color"
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textSize="27dp"/>
