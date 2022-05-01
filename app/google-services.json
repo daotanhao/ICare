@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756883164013",
+    "project_id": "uit-icare",
+    "storage_bucket": "uit-icare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756883164013:android:c02a5510e8cb38fc922864",
+        "android_client_info": {
+          "package_name": "com.icare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756883164013-hqfiklk0dblmo6ja9107tgsjjq6ce8ei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaY-_Hoq20cpXSvLJ1BKC6OLHEgJJGoBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756883164013-hqfiklk0dblmo6ja9107tgsjjq6ce8ei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
