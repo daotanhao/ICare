@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.icare.MainActivity;
+import com.icare.SignUpActivity;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -133,6 +135,7 @@ public class SignInActivity extends AppCompatActivity {
                                 editor = sharedPreferences.edit();
                                 editor.putString("Email", email);
                                 editor.apply();
+
                                 startActivity(intent);
                                 finish();
                             }

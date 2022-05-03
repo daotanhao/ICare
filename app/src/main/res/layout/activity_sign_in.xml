@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,7 +32,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_email_signin"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -49,14 +48,14 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_password_signin"
+                android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/forgotpass"
+            android:id="@+id/btnForgot"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/password_input_layout_signin"
@@ -73,10 +72,10 @@
             tools:ignore="RtlCompat" />
 
         <Button
-            android:id="@+id/btSignin"
+            android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/forgotpass"
+            android:layout_below="@+id/btnForgot"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/button_bg_green"
@@ -84,10 +83,10 @@
             android:textColor="#fff" />
 
         <Button
-            android:id="@+id/jumptosignup"
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btSignin"
+            android:layout_below="@+id/btnSignIn"
             android:layout_gravity="right"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
@@ -102,7 +101,7 @@
             android:id="@+id/tv_othermethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/jumptosignup"
+            android:layout_below="@+id/btnSignUp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
@@ -134,7 +133,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btFB"
+                android:id="@+id/btnFacebook"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:background="@drawable/login_button_bg"
@@ -163,6 +162,7 @@
             android:visibility="invisible">
 
             <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true">

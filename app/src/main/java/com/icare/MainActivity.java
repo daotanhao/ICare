@@ -17,6 +17,7 @@ import com.icare.fragment.WorkoutFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
         BottomNavigationView btmNav = findViewById(R.id.bottom_nav);
-        btmNav.setOnItemSelectedListener( new NavigationBarView.OnItemSelectedListener() {
+        btmNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 handleChangeFragment(item.getItemId());
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if(id == R.id.nav_home){
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, HomeFragment.class,null);
+            fragmentTransaction.replace(R.id.fragment_container,HomeFragment.class,null);
             fragmentTransaction.commit();
         }
         if(id == R.id.nav_workout){
@@ -62,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
         if(id == R.id.nav_meal){
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, MealFragment.class,null);
+            fragmentTransaction.replace(R.id.fragment_container,MealFragment.class,null);
             fragmentTransaction.commit();
         }
     }
+
 
 }
