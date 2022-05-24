@@ -9,21 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <activity
+            android:name=".WorkoutHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutActivity"
+            android:exported="false" />
         <activity android:name=".OnBoardActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SplashScreenActivity2" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
