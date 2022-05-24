@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_view"
-            android:background="@drawable/layout_corner">
+            android:background="@drawable/main_fragment_rounded_corner_data">
 
             <GridLayout
                 android:id="@+id/home_frag_detail"
@@ -583,7 +583,7 @@
                             android:adjustViewBounds="true"
                             android:maxWidth="40dp"
                             android:maxHeight="40dp"
-                            android:src="@drawable/fitness"
+                            android:src="@drawable/pushups_48px"
                             tools:ignore="ContentDescription">
 
                         </ImageView>
