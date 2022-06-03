@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SleepTimeActivity"
+            android:exported="false" />
+        <activity
             android:name=".StepActivity"
             android:exported="false" />
         <activity

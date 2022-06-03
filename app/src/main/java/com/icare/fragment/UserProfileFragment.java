@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.icare.ChangePasswordActivity;
 import com.icare.MainActivity;
 import com.icare.R;
 import com.icare.SignInActivity;
@@ -64,7 +65,7 @@ public class UserProfileFragment extends Fragment {
         logout = rootview.findViewById(R.id.linearlogout);
         mDateOfBirth = rootview.findViewById(R.id.id_date_of_birth);
         mGender = rootview.findViewById(R.id.id_gender);
-//        txtChangePassword = rootview.findViewById(R.id.txtChangePassword);
+        txtChangePassword = rootview.findViewById(R.id.txtChangePassword);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,31 +121,31 @@ public class UserProfileFragment extends Fragment {
                 });
             }
         };
-        mName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ((MainActivity) getActivity()).openEditNameDialog(Gravity.CENTER,3) ;
-            }
-        });
-
-        mDateOfBirth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ((MainActivity) getActivity()).openEditBirthdayDialog(Gravity.CENTER,3);
-            }
-        });
-
-        mGender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ((MainActivity) getActivity()).openEditGenderDialog(Gravity.CENTER,3);
-            }
-        });
+//        mName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                ((MainActivity) getActivity()).openEditNameDialog(Gravity.CENTER,3) ;
+//            }
+//        });
+//
+//        mDateOfBirth.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                ((MainActivity) getActivity()).openEditBirthdayDialog(Gravity.CENTER,3);
+//            }
+//        });
+//
+//        mGender.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                ((MainActivity) getActivity()).openEditGenderDialog(Gravity.CENTER,3);
+//            }
+//        });
         txtChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ChangePassWordActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(intent);
             }
         });
         Thread backgroundThread = new Thread(getUserInfoFromFirebase);
