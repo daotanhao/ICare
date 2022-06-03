@@ -25,7 +25,8 @@ public class OnBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_on_board); layoutOnBoardingIndicators = findViewById(R.id.layoutOnBoardIndicator);
+        setContentView(R.layout.activity_on_board);
+        layoutOnBoardingIndicators = findViewById(R.id.layoutOnBoardIndicator);
         buttonOnBoardingAction = findViewById(R.id.buttonOnBoard);
         setupOnboardingItems();
         ViewPager2 onBoardingViewPager = findViewById(R.id.onBoardViewPager);
@@ -68,8 +69,8 @@ public class OnBoardActivity extends AppCompatActivity {
         onBoardingItems.add(itemFeature3);
 
         onBoardingAdapter = new OnBoardingAdapter(onBoardingItems);
-
     }
+
     private void setupOnboardingIndicators(){
         ImageView[] indicators = new ImageView[onBoardingAdapter.getItemCount()];
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
