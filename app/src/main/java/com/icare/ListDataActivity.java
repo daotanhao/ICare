@@ -342,11 +342,12 @@ public class ListDataActivity extends YouTubeBaseActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListDataActivity.this, MainActivity.class);
-                intent.putExtra("fragmentPosition", 2);
-                startActivity(intent);
+
+//                Intent intent = new Intent(ListDataActivity.this, MainActivity.class);
+//                intent.putExtra("fragmentPosition", 2);
+//                startActivity(intent);
                 finish();
-                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
 

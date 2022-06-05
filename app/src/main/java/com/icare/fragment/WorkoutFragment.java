@@ -157,8 +157,8 @@ public class WorkoutFragment extends Fragment {
             }
         };
 
-        //Thread getRecentWorkoutThread = new Thread(getRecentWorkoutRunnable);
-        //getRecentWorkoutThread.start();
+        Thread getRecentWorkoutThread = new Thread(getRecentWorkoutRunnable);
+        getRecentWorkoutThread.start();
 
         listView = (NonScrollListView) rootView.findViewById(R.id.classic_workout_listview);
         GymListViewAdapter listViewAdapter = new GymListViewAdapter(getActivity(),
