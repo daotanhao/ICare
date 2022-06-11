@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.icare.ChangePassWordActivity;
+import com.icare.ChangePasswordActivity;
 import com.icare.MainActivity;
 import com.icare.R;
 import com.icare.SignInActivity;
@@ -59,10 +59,10 @@ public class UserProfileFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-//        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
+                .requestEmail()
+                .build();
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
         mName = (TextView) rootview.findViewById(R.id.id_fullname);
         mEmail = (TextView) rootview.findViewById(R.id.id_email);
@@ -150,7 +150,7 @@ public class UserProfileFragment extends Fragment {
         txtChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChangePassWordActivity.class);
+                Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
                 startActivity(intent);
             }
         });
