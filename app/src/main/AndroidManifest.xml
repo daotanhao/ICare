@@ -13,10 +13,19 @@
             android:name=".ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".SleepTimeActivity"
+            android:name=".ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".StepActivity"
+            android:name=".SleepTime"
+            android:exported="false" />
+        <activity
+            android:name=".UsageStatistics"
+            android:exported="false" />
+        <activity
+            android:name=".Step"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePassWordActivity"
             android:exported="false" />
         <activity
             android:name=".WorkoutHistoryActivity"

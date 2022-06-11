@@ -17,24 +17,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.icare.ChangePasswordActivity;
+import com.icare.ChangePassWordActivity;
 import com.icare.MainActivity;
 import com.icare.R;
 import com.icare.SignInActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserProfileFragment} factory method to
- * create an instance of this fragment.
- */
-public class UserProfileFragment extends Fragment {
 
+public class UserProfileFragment extends Fragment {
+    private GoogleSignInOptions gso;
     private TextView mName, mId, mEmail, mDateOfBirth, mGender, txtChangePassword;
     ImageView mUserImage;
     private static final String tempEmail = "tempEmail";
@@ -42,6 +42,7 @@ public class UserProfileFragment extends Fragment {
     private DocumentReference docRef;
     private LinearLayout logout;
     private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
 
     public UserProfileFragment() {
 
@@ -58,7 +59,11 @@ public class UserProfileFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-
+//        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
         mName = (TextView) rootview.findViewById(R.id.id_fullname);
         mEmail = (TextView) rootview.findViewById(R.id.id_email);
         mUserImage = rootview.findViewById(R.id.id_userimage);
@@ -71,8 +76,9 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                //
-                /////
+                LoginManager.getInstance().logOut();
+                mGoogleSignInClient.signOut();
+
                 Intent i = new Intent(getActivity(), SignInActivity.class);
                 startActivity(i);
                 getActivity().finish();
@@ -121,30 +127,30 @@ public class UserProfileFragment extends Fragment {
                 });
             }
         };
-//        mName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                ((MainActivity) getActivity()).openEditNameDialog(Gravity.CENTER,3) ;
-//            }
-//        });
-//
-//        mDateOfBirth.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                ((MainActivity) getActivity()).openEditBirthdayDialog(Gravity.CENTER,3);
-//            }
-//        });
-//
-//        mGender.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                ((MainActivity) getActivity()).openEditGenderDialog(Gravity.CENTER,3);
-//            }
-//        });
+        mName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openEditNameDialog(Gravity.CENTER, 3);
+            }
+        });
+
+        mDateOfBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openEditBirthdayDialog(Gravity.CENTER, 3);
+            }
+        });
+
+        mGender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openEditGenderDialog(Gravity.CENTER, 3);
+            }
+        });
         txtChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+                Intent intent = new Intent(getContext(), ChangePassWordActivity.class);
                 startActivity(intent);
             }
         });
@@ -152,6 +158,8 @@ public class UserProfileFragment extends Fragment {
         backgroundThread.start();
         return rootview;
     }
+
+
 }
 
 
