@@ -249,7 +249,7 @@ public class SleepTime extends AppCompatActivity {
 
 
         createNotificationChannel();
-        Intent intent = new Intent(SleepTime.this, AlarmReceiver.class);
+        Intent intent = new Intent(SleepTime.this,AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(SleepTime.this, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -341,7 +341,7 @@ public class SleepTime extends AppCompatActivity {
                 }
 
                 String []update_time_split = (update_time + "").split("\\.");
-                ArrayList<String> update_time_arr = new ArrayList<>(2);
+                ArrayList<String>update_time_arr = new ArrayList<>(2);
                 String update_time_decimal = Math.round(Double.parseDouble("0."+update_time_split[1])*60) +"";
                 update_time_arr.add(update_time_split[0]);
                 if(update_time_decimal.length() == 1){

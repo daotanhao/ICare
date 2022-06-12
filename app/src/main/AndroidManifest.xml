@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.icare">
 
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,35 +20,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
-            android:name=".CompleteUserInfoActivity"
+            android:name=".WorkoutActivity"
             android:exported="false" />
         <activity
             android:name=".ChangePasswordActivity"
             android:exported="false" />
+        <activity android:name=".ForgotPasswordActivity" />
         <activity
-            android:name=".ForgotPasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SleepTime"
+            android:name=".WaterActivity"
             android:exported="false" />
         <activity
             android:name=".UsageStatistics"
             android:exported="false" />
         <activity
+            android:name=".SleepTime"
+            android:exported="false" />
+        <activity
             android:name=".Step"
             android:exported="false" />
-        <activity
-            android:name=".WorkoutHistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ListDataActivity"
-            android:exported="false" />
-        <activity
-            android:name=".WorkoutActivity"
-            android:exported="false" />
+        <activity android:name=".WorkoutHistoryActivity" />
         <activity android:name=".OnBoardActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SplashScreenActivity2" />
+        <activity android:name=".CompleteUserInfoActivity" />
+
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
@@ -52,13 +56,14 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"
-            tools:replace="android:value" />
-        <meta-data
-            android:name="com.facebook.sdk.ClientToken"
-            android:value="@string/facebook_client_token" />
+        <receiver android:name=".model.AlarmReceiver" />
+        <receiver android:name=".model.ReminderWaterReceiver" />
+
+        <activity android:name=".ListDataActivity" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"
+            tools:replace="android:value"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
 
 
         <activity
