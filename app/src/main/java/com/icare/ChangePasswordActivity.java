@@ -3,6 +3,7 @@ package com.icare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,6 +30,9 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     TextInputEditText txtOldPassword, txtNewPassword, txtConfirmPassword;
+    private FirebaseAuth mAuth;
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient mGoogleSignInClient;
     TextView txtBackToHome;
     Button btnChangePassword;
     String oldPassword, newPassword, confirmPassword;
@@ -66,20 +73,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
-                                Toast.makeText(getApplicationContext(), "ok1", Toast.LENGTH_SHORT).show();
 
                                 if (document.exists()) {
                                     password = document.getString("password");
                                     Toast.makeText(getApplicationContext(), password, Toast.LENGTH_SHORT).show();
 
-                                    Toast.makeText(getApplicationContext(), "ok2", Toast.LENGTH_SHORT).show();
                                     BCrypt.Result result = BCrypt.verifyer().verify(oldPassword.toCharArray(), password);
                                     if (result.verified) {
                                         Log.d("LOGGER", "BCrypt verified");
-                                        Toast.makeText(getApplicationContext(), "ok`3", Toast.LENGTH_SHORT).show();
 
                                         if (newPassword.equals(confirmPassword)) {
-                                            Toast.makeText(getApplicationContext(), "ok4", Toast.LENGTH_SHORT).show();
                                             AuthCredential credential = EmailAuthProvider
                                                     .getCredential(theTempEmail, oldPassword);
                                             user.reauthenticate(credential)
@@ -98,6 +101,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                                     if (task.isSuccessful()) {
                                                                                         Toast.makeText(getApplicationContext(), "Password firestore changed", Toast.LENGTH_SHORT).show();
+                                                                                        logOut();
                                                                                     }
                                                                                 }
                                                                             });
@@ -137,9 +141,22 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     }
 
+    private void logOut() {
+        mAuth.signOut();
+        LoginManager.getInstance().logOut();
+        mGoogleSignInClient.signOut();
+
+        Intent i = new Intent(getApplicationContext(), SignInActivity.class);
+        startActivity(i);
+    }
+
     private void addControls() {
 
-
+        mAuth = FirebaseAuth.getInstance();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
+                .requestEmail()
+                .build();
         sharedPreferences = getSharedPreferences(tempEmail, MODE_PRIVATE);
         theTempEmail = sharedPreferences.getString("Email", "");
         firestore = FirebaseFirestore.getInstance();
