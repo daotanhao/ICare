@@ -578,8 +578,8 @@ public class HomeFragment extends Fragment implements SensorEventListener {
 
                             String tempStepGoal = statusOfProgressBar.getText().
                                     toString().substring(1);
-                            if (tempStepGoal != null)
-                                progressBar.setMax(Integer.parseInt(tempStepGoal));
+                            progressBar.setMax(Integer.parseInt(tempStepGoal));
+
                             ProgressBarAnimation progressBarAnimation = new ProgressBarAnimation(progressBar,
                                     numStepsHomeFrag - 1, numStepsHomeFrag);
                             progressBarAnimation.setDuration(100);
