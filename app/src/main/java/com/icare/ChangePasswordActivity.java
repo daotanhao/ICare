@@ -44,6 +44,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private DocumentReference docRef;
     private Log Tag;
     FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +52,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
         addControls();
         addEvents();
     }
+
     private void addEvents() {
         ChangePassword();
+        txtBackToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
     }
 
     private void ChangePassword() {
@@ -63,11 +71,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 newPassword = txtNewPassword.getText().toString();
                 confirmPassword = txtConfirmPassword.getText().toString();
                 if (!oldPassword.isEmpty() && !newPassword.isEmpty() && !confirmPassword.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), theTempEmail, Toast.LENGTH_SHORT).show();
-
                     DocumentReference docRef = firestore.collection("users").document(theTempEmail);
-                    Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
-
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -76,8 +80,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                                 if (document.exists()) {
                                     password = document.getString("password");
-                                    Toast.makeText(getApplicationContext(), password, Toast.LENGTH_SHORT).show();
-
                                     BCrypt.Result result = BCrypt.verifyer().verify(oldPassword.toCharArray(), password);
                                     if (result.verified) {
                                         Log.d("LOGGER", "BCrypt verified");
@@ -95,12 +97,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
                                                                         if (task.isSuccessful()) {
-                                                                            Toast.makeText(getApplicationContext(), "Password authen changed", Toast.LENGTH_SHORT).show();
                                                                             docRef.update("password", BCrypt.withDefaults().hashToString(12, newPassword.toCharArray())).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                 @Override
                                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                                     if (task.isSuccessful()) {
-                                                                                        Toast.makeText(getApplicationContext(), "Password firestore changed", Toast.LENGTH_SHORT).show();
+                                                                                        Toast.makeText(getApplicationContext(), "Password changed", Toast.LENGTH_SHORT).show();
+                                                                                        Toast.makeText(getApplicationContext(), "Please login again!!", Toast.LENGTH_SHORT).show();
+
                                                                                         logOut();
                                                                                     }
                                                                                 }
@@ -121,7 +124,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 //                                            Log.d("LOGGER", email);
 //                                            if (email != null) {
 //                                                docRef.update("password", BCrypt.withDefaults().hashToString(12, newPassword.toCharArray()));
-                                            Toast.makeText(getApplicationContext(), password, Toast.LENGTH_SHORT).show();
 //                                            }
                                         }
                                     }
@@ -143,15 +145,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private void logOut() {
         mAuth.signOut();
-        LoginManager.getInstance().logOut();
-        mGoogleSignInClient.signOut();
-
         Intent i = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(i);
     }
 
     private void addControls() {
-
         mAuth = FirebaseAuth.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
