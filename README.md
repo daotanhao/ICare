@@ -1,5 +1,5 @@
 # ICare
-- This app use for people who want to control their life, improve health and boost productivity
+- This app use is for people who want to control their life, improve health and boost productivity
 ## Author:
 - Nguyen Ngoc Quang Huy - 20521401  
 - Mai Pham Quoc Hung - 20521366
