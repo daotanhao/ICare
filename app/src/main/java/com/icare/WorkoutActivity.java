@@ -196,7 +196,7 @@ public class WorkoutActivity extends AppCompatActivity {
                                                         exerciseTitleWorkout.setText(workoutTitleList.get(0));
                                                         afterStartWorkoutTitle.setText(workoutTitleList.get(exercisePos));
                                                         excerciseNextTitleWorkout.setText("Loading");
-                                                        Glide.with(WorkoutActivity.this)
+                                                        Glide.with(getApplicationContext())
                                                                 .load(workoutUri.get(0))
                                                                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                                                                 .listener(new RequestListener<Drawable>() {
@@ -280,7 +280,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
                 final Context context = getApplication().getApplicationContext();
 
-                Glide.with(WorkoutActivity.this)
+                Glide.with(getApplicationContext())
                         .load(workoutUri.get(exercisePos))
                         .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                         .listener(new RequestListener<Drawable>() {
@@ -462,7 +462,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
             loadingIcon.setVisibility(View.VISIBLE);
 
-            Glide.with(WorkoutActivity.this)
+            Glide.with(getApplicationContext())
                     .load(workoutUri.get(exercisePos))
                     .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                     .listener(new RequestListener<Drawable>() {
@@ -529,7 +529,7 @@ public class WorkoutActivity extends AppCompatActivity {
                 Intent intent = new Intent(WorkoutActivity.this, MainActivity.class);
                 intent.putExtra("fragmentPosition", 2);
                 startActivity(intent);
-                Glide.with(WorkoutActivity.this).clear(gifExerciseWorkout);
+                Glide.with(getApplicationContext()).clear(gifExerciseWorkout);
                 finish();
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
